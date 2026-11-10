@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Major Scale Harmonised: Beginner to Advanced</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#111215;color:#d9dbe1;font:16px/1.6 Georgia,serif}
+.w{max-width:960px;margin:0 auto;padding:16px}
+h1{font-size:28px;margin:8px 0;color:#ffe9cc;font-weight:600}
+h2{font-size:20px;color:#f2a93b;margin:22px 0 6px;font-weight:600}
+h3{font-size:16px;color:#ffe9cc;margin:14px 0 4px}
+p{margin:6px 0}
+.pn{background:#181a20;border:2px solid #6b4a2b;border-radius:8px;padding:14px;margin:12px 0}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select{background:#242832;color:#ffe9cc;border:1px solid #6b4a2b;border-radius:6px;padding:8px 12px;font:15px Georgia,serif;cursor:pointer}
+button:hover,button.on{background:#f2a93b;color:#111215}
+button:focus-visible,select:focus-visible{outline:2px solid #ffe9cc}
+.deg{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:10px}
+.deg button{padding:8px 2px;text-align:center;line-height:1.3}
+.deg b{display:block;font-size:18px}.deg i{display:block;font-size:12px;opacity:.8;font-style:normal}
+.fb{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{border:1px solid #242832;padding:5px 8px;text-align:left}
+th{background:#242832;color:#ffe9cc}
+.tabs{display:flex;gap:6px;margin:14px 0 0}
+.tabs button{flex:1}
+.pane{display:none}.pane.on{display:block}
+.k{color:#f2a93b}.m{color:#9aa3b5;font-size:14px}
+#ans{color:#f2a93b;min-height:24px;font-size:18px}
+ol,ul{margin:6px 0;padding-left:22px}li{margin:4px 0}
+.dot,.ring{transform-box:fill-box;transform-origin:center}
+</style></head><body><div class="w">
+<h1>The major scale harmonised</h1>
+<p class="m">Pick a key, tap a chord, and see and hear it on the neck. The notes shown are the scale; amber is the chord. Press Box to narrow the scale to one position.</p>
+
+<div class="pn">
+<div class="bar"><label for="key">Key</label><select id="key"></select>
+<button id="sv">Triads</button><button id="ps">Play scale</button><button id="bx">Box: All</button></div>
+<div class="deg" id="deg"></div>
+<div class="fb" id="fb"></div>
+<p class="m" id="info"></p>
+</div>
+
+<div class="pn" id="tvp"><h2 style="margin-top:0">Triads on a string set</h2>
+<p class="m" id="tvt"></p>
+<div class="bar"><label for="ss">Strings</label><select id="ss"><option value="0">1-2-3 (e B G)</option><option value="1">2-3-4 (B G D)</option><option value="2">3-4-5 (G D A)</option><option value="3">4-5-6 (D A E)</option></select>
+<span class="bar" id="iv"><button data-i="-1">All</button><button data-i="0" class="on">Root</button><button data-i="1">1st inv</button><button data-i="2">2nd inv</button></span></div>
+<div class="fb" id="tf"></div>
+<p class="m">Dots are labelled R, 3 and 5. Amber is root position, blue is 1st inversion (3rd in the bass), green is 2nd inversion (5th in the bass). The chord follows the one selected above. Tap a voicing to hear it.</p>
+<div class="bar" id="vl"></div></div>
+<div class="tabs"><button class="on" data-t="0">Beginner</button><button data-t="1">Intermediate</button><button data-t="2">Advanced</button><button data-t="3">Theory</button></div>
+
+<div class="pane on pn" id="p0">
+<h2>1. The major scale</h2>
+<p>Seven notes built from a pattern of whole (W) and half (H) steps: <span class="k">W W H W W W H</span>. On the guitar a whole step is two frets, a half step is one. In C that gives C D E F G A B, the white notes of a piano.</p>
+<h2>2. Harmonising means stacking thirds</h2>
+<p>To harmonise a scale, build a chord on every note using only notes from that scale. Take a note, skip one, take the next, skip one, take the next. On C: C E G. On D: D F A. On E: E G B. Each chord is named after its starting note, its root.</p>
+<h2>3. Why the qualities change</h2>
+<p>A major third is 4 frets, a minor third is 3 frets. Because the scale has uneven steps, the stacked thirds come out different:</p>
+<table><tr><th>Degree</th><th>Thirds</th><th>Quality</th><th>In C</th></tr>
+<tr><td>I, IV, V</td><td>4 + 3</td><td>major</td><td>C, F, G</td></tr>
+<tr><td>ii, iii, vi</td><td>3 + 4</td><td>minor</td><td>Dm, Em, Am</td></tr>
+<tr><td>vii°</td><td>3 + 3</td><td>diminished</td><td>Bdim</td></tr></table>
+<p>The pattern is the same in every key: <span class="k">major, minor, minor, major, major, minor, diminished</span>. Learn it once and you know all twelve keys.</p>
+<h2>4. Roman numerals</h2>
+<p>Upper case is major, lower case is minor. They describe the chord's job in any key. I–IV–V in G is G–C–D; in A it is A–D–E. This is why songwriters and bands talk in numbers.</p>
+<h2>5. Try it</h2>
+<p>Choose G in the key menu. Those chords (G, Am, Bm, C, D, Em, F#dim) are the whole open-chord family of G. Strum I, IV, V and then vi. Switch to C and notice that F and G sit next to your Am and Em shapes.</p>
+<div class="bar"><button id="qz">New question</button><button id="rv">Reveal</button></div>
+<p id="q"></p><p id="ans"></p>
+</div>
+
+<div class="pane pn" id="p1">
+<h2>1. Seventh chords</h2>
+<p>Add one more third on top and you get four-note chords: <span class="k">Imaj7, ii7, iii7, IVmaj7, V7, vi7, viiø7</span>. Press the Triads/7ths button above to switch. Only V gets the dominant 7th, a major triad with a minor seventh, and that is what makes it pull so hard toward home.</p>
+<h2>2. Function: three jobs</h2>
+<table><tr><th>Function</th><th>Chords</th><th>Feel</th></tr>
+<tr><td>Tonic</td><td>I, vi, iii</td><td>rest, home</td></tr>
+<tr><td>Subdominant</td><td>IV, ii</td><td>moving away</td></tr>
+<tr><td>Dominant</td><td>V, vii°</td><td>tension, wants to resolve</td></tr></table>
+<p>Most progressions go tonic, then subdominant, then dominant, then back to tonic. The tritone between the 3rd and 7th of V7 (B and F in G7) resolves inward to C and E in Cmaj7. That one resolution is the engine of tonal harmony.</p>
+<h2>3. Common progressions</h2>
+<p>Pick one and hear it in the current key:</p>
+<div class="bar" id="pg"></div><p id="pn" class="m"></p>
+<h2>4. Nashville numbers and capo</h2>
+<p>Because the pattern is the same everywhere, you can play a song in G with a capo on fret 2 and the shapes stay the same while the key becomes A. Learn progressions as numbers and you can transpose instantly.</p>
+<h2>5. The 12-bar blues</h2>
+<p>I7 I7 I7 I7 / IV7 IV7 I7 I7 / V7 IV7 I7 V7. It borrows the V7 sound for all three chords, a deliberate step outside the strict harmonised scale.</p>
+</div>
+
+<div class="pane pn" id="p2">
+<h2>1. Modes are the same notes with a new home</h2>
+<p>Each chord implies a scale built from the same seven notes starting on its root: <span class="k">I Ionian, ii Dorian, iii Phrygian, IV Lydian, V Mixolydian, vi Aeolian, vii Locrian</span>. Over Dm7 in C, play D Dorian (D E F G A B C). You are not changing notes, you are changing which note feels like home. Tap a chord above to see its scale on the neck, with the chord tones highlighted.</p>
+<h2>2. Avoid notes</h2>
+<p>Over a major chord the natural 4th clashes with the 3rd (F over C). Play it as a passing tone or use IV's Lydian #4 instead. Over iii (Phrygian) the b2 is the characteristic colour and is quite dark; over vii it is the b5 that gives Locrian its instability.</p>
+<h2>3. Extensions</h2>
+<p>Keep stacking thirds: 9th, 11th, 13th (the same notes an octave up). Diatonic 9ths work on every degree. The natural 11th is only safe on the minor chords (ii, iii, vi); on IV use the #11 and on I and V leave it out. The 13th works well on V.</p>
+<h2>4. Guide-tone voice leading</h2>
+<p>In ii–V–I, track the 3rds and 7ths. In C: Dm7 (F, C) → G7 (B, F) → Cmaj7 (E, B). The 7th of each chord falls by a half step or step to the 3rd of the next: C→B, F→E. Voicing with just these two notes plus the root outlines the whole progression and is the basis of jazz comping.</p>
+<h2>5. Going outside the scale</h2>
+<p><span class="k">Secondary dominants:</span> a V7 of any diatonic chord. In C: A7→Dm (V7/ii), E7→Am (V7/vi), D7→G (V7/V), B7→Em (V7/iii), C7→F (V7/IV).<br>
+<span class="k">Modal interchange:</span> borrow chords from the parallel minor: bVII (Bb), bVI (Ab), bIII (Eb), iv (Fm). The Beatles-style IV–iv–I is a classic example.<br>
+<span class="k">Tritone substitution:</span> replace V7 with the dominant a tritone away (Db7 for G7). It shares the same 3rd and 7th, with the roles swapped.</p>
+<h2>6. On the guitar</h2>
+<p>Use the triad viewer above. Play I, IV and V as triads on strings 4-3-2, then 3-2-1, then 5-4-3, using one position at a time. Watch how little your hand moves. Then add the 7ths and see which note changes between neighbouring chords. This is how you stop playing shapes and start playing harmony.</p>
+</div>
+<div class="pane pn" id="p3">
+<p class="m">A reference for why everything in the other tabs works. Read it straight through, or dip in when a term needs unpacking.</p>
+
+<h2>How to use this lesson</h2>
+<p>This page is built to be played with, not just read. Every idea appears in three forms: its <b>name</b> (a chord symbol or a number), its <b>shape</b> on the neck, and its <b>sound</b>. Lasting progress comes from joining all three. For each new thing, say the name, find it on the fretboard, play it on your own guitar, and listen to how it behaves. The dots pulse as notes sound so that your eyes follow what your ears hear.</p>
+<p>The lesson has three levels that build on one another, plus this theory reference. Work through the levels in order, and do not move on until the checkpoint at the end of each stage feels easy. A few weeks of steady practice on one stage beats a single weekend of rushing through all of them.</p>
+
+<h3>The tools at the top of the page</h3>
+<table><tr><th>Tool</th><th>What it does</th><th>How to get the most from it</th></tr>
+<tr><td>Key menu</td><td>Changes the key for the chords, the neck and the progressions.</td><td>Do not live in C. Cycle through all twelve keys over the weeks. The patterns are identical in every key, which is the whole point.</td></tr>
+<tr><td>Chord buttons (I to vii°)</td><td>Play the chord, show its notes in amber on the neck and name the mode it implies.</td><td>Listen first, then play the chord on your guitar and check that it matches. Name each chord's job (home, moving away, tension) before moving on.</td></tr>
+<tr><td>Triads / 7ths</td><td>Switches the chords between three notes and four.</td><td>Stay on triads until they are automatic, then switch to 7ths and listen for what the extra note adds.</td></tr>
+<tr><td>Play scale</td><td>Plays the seven notes and the octave, pulsing each one on the neck.</td><td>Play along on your guitar, first on one string, then across the strings. Sing or hum each note as you play it. With a box selected it plays just that box, from the low string up.</td></tr>
+<tr><td>Box</td><td>Narrows the neck to one five-fret scale position instead of showing every note. Each press moves to the next of seven boxes, then back to All.</td><td>Learn one box at a time and play it up and down. Start with Box 1 (root on the low E string), then link neighbouring boxes.</td></tr>
+<tr><td>String-set viewer</td><td>Shows every triad of the selected chord within a four-fret span on a chosen set of three adjacent strings, with R, 3 and 5 labelled.</td><td>Use the inversion buttons to isolate one shape at a time. Learn one string set fully before starting the next.</td></tr>
+<tr><td>Voicing buttons</td><td>Play one voicing. The numbers are frets, from the lowest string to the highest.</td><td>Hear it, then play it. A dash-separated label such as 5-4-3 is a ready-made fingering to try.</td></tr>
+<tr><td>Progression buttons (Intermediate tab)</td><td>Play common progressions in the current key.</td><td>Listen to the whole loop twice, then play along. Try every key.</td></tr>
+<tr><td>New question / Reveal (Beginner tab)</td><td>Quizzes you on chords in random keys.</td><td>Answer out loud before you reveal. Aim for ten in a row with no mistakes.</td></tr></table>
+
+<h3>Six habits that make practice work</h3>
+<ol>
+<li><b>Slow and accurate beats fast and sloppy.</b> Play at a speed where every note is clean and in time, preferably with a metronome. Speed comes later by itself.</li>
+<li><b>Say it out loud.</b> Name the chord, the number and the notes while you play. If you can say it, you know it. If you can only copy a shape, you do not yet.</li>
+<li><b>Listen before you play.</b> Press the chord or progression, close your eyes, then try to reproduce it. This trains your ear, the skill that most separates advanced players from beginners.</li>
+<li><b>Move it to another key.</b> Anything you learn in one key is only half learned. Repeat it in at least two more, then eventually all twelve.</li>
+<li><b>Apply it to real songs.</b> Take songs you love and work out their chords as numbers. The theory only becomes real once you hear it in music you care about.</li>
+<li><b>Little and often.</b> Twenty focused minutes most days is better than two hours once a week. Short sessions let your hands and your memory consolidate what you learned.</li>
+</ol>
+
+<h3>Stage 1: Beginner (aim: know the chord family of any key)</h3>
+<p><b>Goal:</b> understand how a scale becomes a set of chords, and play simple progressions in several keys.</p>
+<ol>
+<li>Read the Beginner tab once. Press <i>Play scale</i> in C and hum along. Learn the pattern W W H W W W H and notice where the two half steps fall (between 3 and 4, and 7 and 8). Then press Box and learn Box 1 on its own before the others.</li>
+<li>Memorise the quality pattern <span class="k">major, minor, minor, major, major, minor, diminished</span>. Say it out loud until you do not have to think. Use the quiz on the Beginner tab, and answer before pressing Reveal.</li>
+<li>Choose G, then C, then D. Tap each chord and match it on your guitar. Start with the chords you can already play (in G: G, C, D, Em, Am). Leave the barre chords and the diminished chord for later.</li>
+<li>Play I–IV–V–I, then I–V–vi–IV, in G, C, D, A and E. Use the progression buttons on the Intermediate tab to hear each one first.</li>
+<li>Pick three songs you know and write out their chords as numbers. You will find the same few patterns again and again.</li>
+</ol>
+<p><b class="k">Checkpoint:</b> you can recite the quality pattern from memory, name the chords I to vi in five keys without looking, and play I–V–vi–IV cleanly in five keys. From the theory reference below, read <i>Pitch, octave and the semitone</i>, <i>Intervals</i>, <i>Why a seven-note scale</i> and <i>Building chords by stacking thirds</i>.</p>
+
+<h3>Stage 2: Intermediate (aim: hear function and play closed shapes)</h3>
+<p><b>Goal:</b> understand why chords sound the way they do, add 7ths, and move off the open position using triads.</p>
+<ol>
+<li>Press <i>7ths</i> and play through the chords in one key. Learn the shapes for maj7, m7 and dominant 7th. Play V and V7 back to back in the progression buttons and listen to how the 7th makes the pull toward home stronger.</li>
+<li>Label chords by function: tonic, subdominant or dominant. Then analyse your three songs again. Notice that they tend to leave home, move away, create tension and return.</li>
+<li>Open the string-set viewer. Start with string set 3-4-5 or 4-5-6, because the shapes are identical on both. Set the filter to <i>Root</i>, learn the major and minor shapes, then add 1st inversion, then 2nd. Say R, 3 and 5 as you play each note.</li>
+<li>Choose one position on the neck and play I, IV and V as triads without moving your hand. Notice how little you have to move. Then repeat on the other string sets, one at a time.</li>
+<li>Play ii–V–I in at least six keys, first as triads, then as 7th chords. Listen to the resolution each time.</li>
+<li>Try a capo. Play the same shapes with the capo on different frets and see how the key changes while the numbers stay the same. Then play a 12-bar blues in two keys.</li>
+</ol>
+<p><b class="k">Checkpoint:</b> you can play I, IV, V and vi as closed triads on two string sets in any key, in all three inversions, and name the function of every diatonic chord. Read <i>Naming</i>, <i>Harmonic function</i> and <i>Keys, key signatures and the circle of fifths</i> in the reference.</p>
+
+<h3>Stage 3: Advanced (aim: improvise, voice-lead and go beyond the scale)</h3>
+<p><b>Goal:</b> use the harmonised scale as a map for improvising, comping and writing, and learn when to step outside it.</p>
+<ol>
+<li>Tap each chord and look at the neck. The seven scale notes are shown and the chord's tones are amber. Improvise over each chord using the scale of the matching mode (Dm7 with D Dorian, G7 with G Mixolydian), and aim to land on a chord tone, especially the 3rd or 7th, on strong beats.</li>
+<li>Practise guide tones. In ii–V–I, play only the 3rd and 7th of each chord and listen to how the 7th falls by a step to the 3rd of the next chord. Do this in all twelve keys.</li>
+<li>Connect triads across string sets. For each chord change, find the nearest voicing, keeping any common tone and moving the other notes by step. This is voice leading, and it is how you stop playing shapes and start playing harmony.</li>
+<li>Add extensions one at a time: 9ths first (safe on every degree), then 13ths on V, then #11 on IV. Listen to each change before you add the next.</li>
+<li>Step outside the scale one chord at a time. Insert a single secondary dominant, then a borrowed chord such as bVII or iv, then a tritone substitution. Hear what each one does before combining them.</li>
+<li>Work from songs. Transcribe a tune you admire, analyse it with numbers and functions, and note where it leaves the key. Then write a short progression of your own that uses what you found.</li>
+</ol>
+<p><b class="k">Checkpoint:</b> you can improvise a few choruses over a ii–V–I in any key, hitting the guide tones, and explain why each chord in a song does what it does. Read <i>Modes and chord-scales</i>, <i>Extensions</i>, <i>Beyond the scale</i> and <i>What this means on the guitar</i> in the reference.</p>
+
+<h3>A twenty-minute practice session</h3>
+<table><tr><th>Minutes</th><th>Activity</th><th>Purpose</th></tr>
+<tr><td>3</td><td>Pick a key you have not used lately. Play the scale and name the seven chords.</td><td>Warm up and keep all twelve keys in circulation.</td></tr>
+<tr><td>7</td><td>Work on one new item for your stage: a progression, a string set, an inversion or a mode.</td><td>New material, slowly and in time.</td></tr>
+<tr><td>5</td><td>Play it in two more keys.</td><td>Make it transferable.</td></tr>
+<tr><td>3</td><td>Review something from last week.</td><td>Keep the old material alive.</td></tr>
+<tr><td>2</td><td>Play along with a song or a backing track using what you practised.</td><td>Turn practice into music.</td></tr></table>
+<p>Change only one thing at a time. If you are learning a new string set, play familiar chords; if you are learning new chords, use a familiar shape. This keeps the task small enough to learn from.</p>
+
+<h3>Common mistakes</h3>
+<ul>
+<li><b>Memorising shapes without names.</b> If you cannot say what a shape is, you cannot move it to another key.</li>
+<li><b>Staying in one key.</b> C and G feel comfortable, but the real learning happens when you switch.</li>
+<li><b>Skipping the listening.</b> Playing along with the tool without hearing the difference between chords means you are doing finger exercises, not ear training.</li>
+<li><b>Learning everything at once.</b> Seven chords, four string sets and three inversions is 84 shapes. Learn them one string set and one inversion at a time.</li>
+<li><b>Reading without playing.</b> If you have been reading for ten minutes and have not picked up the guitar, pick it up.</li>
+<li><b>Moving on too soon.</b> If a checkpoint feels hard, stay on that stage another week. Easy fluency at one level makes the next one much quicker.</li>
+</ul>
+
+<h3>Using the reference below</h3>
+<p>You do not need to read the rest of this tab in order. Treat it as a reference: when the lesson uses a word or an idea you are unsure about, find the matching section below. The checkpoint at the end of each stage above lists the sections that best support that stage. The theory tells you why something works, and the tools above let you hear and feel it. You need both.</p>
+
+<h2>Pitch, octave and the semitone</h2>
+<p>Pitch is how high or low a note sounds, set by the frequency of vibration. Double the frequency and you hear the same note an octave higher, so notes are named by letter and repeat every octave. Western music divides the octave into 12 equal steps called semitones (half steps). On guitar one fret is one semitone. A tone (whole step) is two semitones. The 12 notes are C C#/Db D D#/Eb E F F#/Gb G G#/Ab A A#/Bb B. The same pitch with two names (F# and Gb) is called an enharmonic pair.</p>
+<p>The natural notes have uneven gaps: there is no black key between E and F or between B and C, so those pairs are a semitone apart and the rest are a tone.</p>
+
+<h2>Intervals</h2>
+<p>An interval is the distance between two notes. Its number counts letter names (C to E is a 3rd because C D E), and its quality comes from the semitone count.</p>
+<table><tr><th>Semitones</th><th>Name</th><th>Example from C</th></tr>
+<tr><td>1</td><td>minor 2nd</td><td>Db</td></tr><tr><td>2</td><td>major 2nd</td><td>D</td></tr>
+<tr><td>3</td><td>minor 3rd</td><td>Eb</td></tr><tr><td>4</td><td>major 3rd</td><td>E</td></tr>
+<tr><td>5</td><td>perfect 4th</td><td>F</td></tr><tr><td>6</td><td>tritone (aug 4th / dim 5th)</td><td>F# / Gb</td></tr>
+<tr><td>7</td><td>perfect 5th</td><td>G</td></tr><tr><td>8</td><td>minor 6th</td><td>Ab</td></tr>
+<tr><td>9</td><td>major 6th</td><td>A</td></tr><tr><td>10</td><td>minor 7th</td><td>Bb</td></tr>
+<tr><td>11</td><td>major 7th</td><td>B</td></tr><tr><td>12</td><td>octave</td><td>C</td></tr></table>
+<p>Perfect intervals (unison, 4th, 5th, octave) have one standard size. 2nds, 3rds, 6ths and 7ths come in major and minor forms, a semitone apart. Shrink a minor or perfect interval by a semitone and it becomes diminished; widen a major or perfect one and it becomes augmented.</p>
+
+<h2>Why a seven-note scale</h2>
+<p>A scale is a chosen subset of the 12 notes. The major scale is a diatonic scale: seven notes, each letter name used once, with five whole steps and two half steps. The half steps sit between degrees 3 and 4 and between 7 and 8, which is what gives the scale its shape.</p>
+<p>It can be read as two identical four-note groups (tetrachords), W W H, joined by a whole step: C D E F + G A B C. The same pattern starting on G gives G A B C + D E F# G, which is why moving the key up a fifth adds one sharp.</p>
+<p>The same seven notes also come from stacking perfect fifths. Starting on F: F C G D A E B. Six fifths yield the seven notes, and folding them into one octave gives the scale. This is why the fifth is the most important interval in tonal music after the octave.</p>
+<p>The scale degrees (relative to the tonic) are the major 2nd, major 3rd, perfect 4th, perfect 5th, major 6th and major 7th. Any scale with exactly these intervals is major, in any key.</p>
+
+<h2>Where the intervals come from</h2>
+<p>Strike a string and it vibrates in whole and fractional parts at once, giving the harmonic series: partials at 1, 2, 3, 4, 5, 6 times the base frequency. The ratios between neighbours are the simple intervals of tonal music: 2:1 octave, 3:2 perfect fifth, 4:3 perfect fourth, 5:4 major third, 6:5 minor third. Simple ratios sound consonant, complex ones sound tense.</p>
+<p>Modern instruments use equal temperament, where every semitone is the same ratio (the 12th root of 2). This lets one instrument play in every key. The fifth is almost pure (700 cents against 702), but the equal-tempered major third is about 14 cents wider than the pure 5:4, which is one reason a fretted guitar chord is never perfectly in tune.</p>
+
+<h2>Building chords by stacking thirds</h2>
+<p>Western harmony is tertian: chords are built from stacked thirds. Each third is either major (4 semitones) or minor (3), so four triads are possible.</p>
+<table><tr><th>Triad</th><th>Thirds</th><th>Intervals from root</th><th>Occurs in major scale</th></tr>
+<tr><td>Major</td><td>M3 + m3</td><td>1 3 5</td><td>I, IV, V</td></tr>
+<tr><td>Minor</td><td>m3 + M3</td><td>1 b3 5</td><td>ii, iii, vi</td></tr>
+<tr><td>Diminished</td><td>m3 + m3</td><td>1 b3 b5</td><td>vii°</td></tr>
+<tr><td>Augmented</td><td>M3 + M3</td><td>1 3 #5</td><td>none (it is a symmetrical chord)</td></tr></table>
+<p>Because the major scale contains only seven notes and two of its gaps are half steps, harmonising it yields exactly three major triads, three minor triads and one diminished triad, always in the order M m m M M m dim. The diminished triad is the only one that contains a tritone (B and F in C), which is why it is unstable and wants to resolve.</p>
+<p>Add a fourth note a third higher and you have the diatonic seventh chords:</p>
+<table><tr><th>Degree</th><th>Chord</th><th>Formula</th><th>In C</th></tr>
+<tr><td>I, IV</td><td>major 7th</td><td>1 3 5 7</td><td>Cmaj7, Fmaj7</td></tr>
+<tr><td>ii, iii, vi</td><td>minor 7th</td><td>1 b3 5 b7</td><td>Dm7, Em7, Am7</td></tr>
+<tr><td>V</td><td>dominant 7th</td><td>1 3 5 b7</td><td>G7</td></tr>
+<tr><td>vii</td><td>half-diminished (m7b5)</td><td>1 b3 b5 b7</td><td>Bm7b5</td></tr></table>
+<p>A fully diminished 7th (1 b3 b5 bb7) does not occur in the major scale; it appears in the harmonic minor.</p>
+
+<h2>Naming: Roman numerals, figures and slash chords</h2>
+<p>Roman numerals name a chord by its scale degree: upper case for major, lower case for minor, ° for diminished, ø for half-diminished. They are key-independent, so a progression written as numbers transposes by changing one letter. Nashville notation does the same with Arabic numbers.</p>
+<p>Inversions are named by which chord tone is lowest. In classical figured bass, a first-inversion triad (3rd in the bass) is written 6 and a second-inversion triad (5th in the bass) 6/4. In lead-sheet style they are written as slash chords: C/E is a C chord with E in the bass, C/G a C chord with G in the bass. An inversion changes the bass note and therefore the feel (first inversion is lighter and more mobile, second is unstable), but not the chord's identity.</p>
+
+<h2>Harmonic function</h2>
+<p>Tonal harmony is a system of tension and release around a home chord. Every diatonic chord inherits a role from the notes it shares with I, IV and V, the three primary chords.</p>
+<p><b class="k">Tonic</b> (I, with vi and iii as substitutes) is rest. <b class="k">Subdominant</b> (IV, with ii) moves away from rest. <b class="k">Dominant</b> (V and vii°) is maximum tension and creates the pull back to I.</p>
+<p>The dominant pull comes from two notes. The 7th degree is a semitone below the tonic and is called the leading tone (B to C in C). In V7 the chord's 7th (F in G7) falls a semitone to the 3rd of I (E). Together B and F form a tritone that collapses inward onto the third and root of the tonic chord. vii° is the same tritone with the root of V removed, so it behaves like a V7 without its root. iii shares two notes with both I and V, which makes it flexible and often ambiguous.</p>
+<p>The usual order is tonic, then subdominant, then dominant, then tonic, though composers and songwriters break it constantly. The common cadences (phrase endings) are authentic (V–I, the strongest), plagal (IV–I, the "amen"), half (ending on V, an unresolved question) and deceptive (V–vi, where the ear expects I).</p>
+
+<h2>Keys, key signatures and the circle of fifths</h2>
+<p>Because the major scale pattern is fixed, a key signature records which notes are sharp or flat. Moving up a perfect fifth adds one sharp (the new 7th degree); moving up a fourth (down a fifth) adds one flat. Sharps are added in the order F C G D A E B, flats in the reverse order B E A D G C F.</p>
+<table><tr><th>Sharps</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+<tr><td>Key</td><td>C</td><td>G</td><td>D</td><td>A</td><td>E</td><td>B</td><td>F#</td></tr>
+<tr><th>Flats</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+<tr><td>Key</td><td>C</td><td>F</td><td>Bb</td><td>Eb</td><td>Ab</td><td>Db</td><td>Gb</td></tr></table>
+<p>Neighbouring keys on the circle share six of their seven notes, so modulating (changing key) to a neighbour is smooth. This is also why the vi, ii, iii and V chords of one key reappear as I, IV and others in neighbouring keys.</p>
+<p>The relative minor of any major key starts on its 6th degree (A minor for C major) and shares the same notes and key signature. The natural minor scale is that same collection starting on vi, called Aeolian. Raising its 7th by a semitone gives the harmonic minor, which creates a major V and a leading tone and is the source of most minor-key dominant chords.</p>
+
+<h2>Modes and chord-scales</h2>
+<p>A mode is the same scale entered from a different starting note, with that note treated as home. The seven modes of the major scale are Ionian (major), Dorian, Phrygian, Lydian, Mixolydian, Aeolian (natural minor) and Locrian. Each has a characteristic interval:</p>
+<table><tr><th>Mode</th><th>Built on</th><th>Formula against major</th><th>Character</th></tr>
+<tr><td>Ionian</td><td>I</td><td>1 2 3 4 5 6 7</td><td>bright, resolved</td></tr>
+<tr><td>Dorian</td><td>ii</td><td>1 2 b3 4 5 6 b7</td><td>minor with a natural 6th</td></tr>
+<tr><td>Phrygian</td><td>iii</td><td>1 b2 b3 4 5 b6 b7</td><td>dark, Spanish</td></tr>
+<tr><td>Lydian</td><td>IV</td><td>1 2 3 #4 5 6 7</td><td>floating, dreamy</td></tr>
+<tr><td>Mixolydian</td><td>V</td><td>1 2 3 4 5 6 b7</td><td>major with a bluesy 7th</td></tr>
+<tr><td>Aeolian</td><td>vi</td><td>1 2 b3 4 5 b6 b7</td><td>natural minor</td></tr>
+<tr><td>Locrian</td><td>vii</td><td>1 b2 b3 4 b5 b6 b7</td><td>unstable, rarely a home</td></tr></table>
+<p>The harmonised scale and the modes are two views of one idea. Each chord of the harmonised scale is the chord that a mode's first, third, fifth and seventh notes form, so each chord implies its mode as a melodic source. Dm7 in C implies D Dorian, G7 implies G Mixolydian, and so on. This is the chord-scale relationship. It only describes available notes; what a mode actually sounds like depends on the chords underneath it, which must emphasise its characteristic note.</p>
+
+<h2>Extensions, alterations and tensions</h2>
+<p>Continue stacking thirds past the 7th and you reach the 9th (2nd), 11th (4th) and 13th (6th), the same notes an octave higher. These are called extensions, and chords can include them without every intermediate note. A chord that contains a note a semitone from a chord tone (such as natural 11 against a major 3rd) is dissonant; those are called avoid notes, and they explain why Lydian's #4 sounds better than a natural 4th over a major chord.</p>
+
+<h2>Beyond the scale</h2>
+<p><b class="k">Secondary dominants</b> are V7 chords of other diatonic chords. They temporarily point to a chord other than I, tonicising it. The notation V7/ii is read as the dominant of ii. Their foreign note is a chromatic tone from outside the scale.</p>
+<p><b class="k">Modal interchange</b> borrows chords from the parallel minor (or other modes of the same tonic). bVII, bVI, bIII and iv are the most common borrowed chords.</p>
+<p><b class="k">Tritone substitution</b> works because V7 and the dominant a tritone away share the same two crucial notes: the 3rd of one is the 7th of the other.</p>
+<p><b class="k">Voice leading</b> is how individual notes move from chord to chord. Smooth voice leading keeps common tones, moves other notes by a step, and resolves tensions (7ths down, leading tones up). The 3rd and 7th of each chord define its quality and function, which is why they are called guide tones.</p>
+
+<h2>What this means on the guitar</h2>
+<p>Standard tuning is E A D G B E: perfect fourths between all strings except G to B, which is a major third. Two consequences follow. First, any shape built wholly on strings tuned a fourth apart is moveable across those strings without distortion, so triad shapes are identical on string sets 3-4-5 and 4-5-6 but different on 1-2-3 and 2-3-4 (which cross the G–B gap). Second, because a fret is a semitone, any chord shape with no open strings can slide up the neck to change its root, and every note on the neck repeats within about 12 frets.</p>
+<p>Three-note triads on adjacent strings have exactly three forms, one per inversion. Learn the three on each string set and you can play every diatonic triad in every key by moving them to the right fret. This is what the string-set viewer shows.</p>
+
+<h2>Quick glossary</h2>
+<p><b>Tonic:</b> the home note and chord. <b>Diatonic:</b> using only notes of the key. <b>Chromatic:</b> using notes outside the key. <b>Degree:</b> a note's number in the scale. <b>Root:</b> the note a chord is named after. <b>Triad:</b> three-note chord of stacked thirds. <b>Inversion:</b> a chord with a note other than the root in the bass. <b>Cadence:</b> a chord pair that ends a phrase. <b>Modulation:</b> changing key. <b>Parallel key:</b> same tonic, different mode (C major and C minor). <b>Relative key:</b> same notes, different tonic (C major and A minor).</p>
+</div>
+</div>
+<script>
+var LET=['C','D','E','F','G','A','B'],NAT=[0,2,4,5,7,9,11],MAJ=NAT;
+var KEYS=[['C',0],['G',7],['D',2],['A',9],['E',4],['B',11],['F#',6],['Db',1],['Ab',8],['Eb',3],['Bb',10],['F',5]];
+var TRI=['','m','m','','','m','dim'],SEV=['maj7','m7','m7','maj7','7','m7','m7b5'];
+var ROM=['I','ii','iii','IV','V','vi','vii\u00b0'],ROM7=['Imaj7','ii7','iii7','IVmaj7','V7','vi7','vii\u00f87'];
+var MODE=['Ionian','Dorian','Phrygian','Lydian','Mixolydian','Aeolian','Locrian'];
+var PROGS=[['I\u2013IV\u2013V',[0,3,4]],['I\u2013V\u2013vi\u2013IV',[0,4,5,3]],['vi\u2013IV\u2013I\u2013V',[5,3,0,4]],['I\u2013vi\u2013IV\u2013V',[0,5,3,4]],['ii\u2013V\u2013I',[1,4,0]]];
+var OPEN=[4,11,7,2,9,4];/* high e at top */
+var box=-1,key=0,deg=0,sev=false,ctx=null,qd=0,qk=0;
+function $(id){return document.getElementById(id);}
+function acc(n){return n===0?'':n===1?'#':n===-1?'b':n===2?'##':'bb';}
+function scaleOf(k){var r=KEYS[k],li=LET.indexOf(r[0].charAt(0)),o=[],i,l,d;
+ for(i=0;i<7;i++){l=(li+i)%7;d=(((r[1]+MAJ[i])%12-NAT[l])%12+12)%12;if(d>6)d-=12;o.push(LET[l]+acc(d));}return o;}
+function chordIdx(d,s){var a=[d,d+2,d+4];if(s)a.push(d+6);return a;}
+function chordName(sc,d,s){return sc[d]+(s?SEV[d]:TRI[d]);}
+function ab(j){return KEYS[key][1]+12*Math.floor(j/7)+MAJ[j%7];}
+function pluck(f,t){var sr=ctx.sampleRate,n=Math.floor(sr*1.8),b=ctx.createBuffer(1,n,sr),d=b.getChannelData(0),p=Math.round(sr/f),i,s,g;
+ for(i=0;i<p;i++)d[i]=Math.random()*2-1;
+ for(i=p;i<n;i++)d[i]=0.996*0.5*(d[i-p]+d[i-p+1]);
+ s=ctx.createBufferSource();s.buffer=b;g=ctx.createGain();g.gain.value=0.22;s.connect(g);g.connect(ctx.destination);s.start(ctx.currentTime+t);}
+function hz(j){return 440*Math.pow(2,(48+ab(j)-69)/12);}
+function init(){if(!ctx){var C=window.AudioContext||window.webkitAudioContext;ctx=new C();}if(ctx.resume)ctx.resume();}
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function flash(g){
+ if(!g.animate)return;
+ var c=g.querySelector('circle:not(.ring)'),r=g.querySelector('.ring'),tx=g.querySelector('text'),cf=c.getAttribute('fill'),tf=tx.getAttribute('fill');
+ if(!RM)g.animate([{transform:'scale(1)'},{transform:'scale(1.45)',offset:0.2},{transform:'scale(1)'}],{duration:550,easing:'ease-out'});
+ c.animate([{fill:'#fff1d6'},{fill:'#fff1d6',offset:0.25},{fill:cf}],{duration:550});
+ tx.animate([{fill:'#111215'},{fill:'#111215',offset:0.25},{fill:tf}],{duration:550});
+ r.animate(RM?[{opacity:0.9},{opacity:0}]:[{opacity:0.9,transform:'scale(1)'},{opacity:0,transform:'scale(1.8)'}],{duration:650,easing:'ease-out'});}
+function pulseAt(t,sel){setTimeout(function(){var e=document.querySelectorAll(sel),i;for(i=0;i<e.length;i++)flash(e[i]);},Math.max(0,t*1000));}
+function pulsePC(j,t){pulseAt(t,'#fb .dot[data-n="'+(ab(j)%12)+'"]');}
+function playChord(d,t,s){var a=chordIdx(d,s),i;init();for(i=0;i<a.length;i++){pluck(hz(a[i]),t+i*0.045);pulsePC(a[i],t+i*0.045);}}
+function boxWin(){if(box<0)return null;var lo=(((KEYS[key][1]+MAJ[box])%12)-4+12)%12-1;return [lo,lo+4];}
+function inBox(f,w){if(!w)return true;return (f>=w[0]&&f<=w[1])||(f>=w[0]+12&&f<=w[1]+12)||(f>=w[0]-12&&f<=w[1]-12);}
+function boxNote(sc){if(box<0)return '';var w=boxWin(),f=w[0]+1;
+ return ' <b class="k">Box '+(box+1)+'</b>: anchored on '+sc[box]+' (scale degree '+(box+1)+') on the low E string, '+(f?'fret '+f:'the open string')+'; frets '+Math.max(w[0],0)+' to '+Math.min(w[1],12)+'. The same shape repeats 12 frets away.';}
+function playBox(){var w=boxWin(),lo=Math.max(w[0],0),hi=Math.min(w[1],12),map={},i,s,f,n,t=0;
+ for(i=0;i<7;i++)map[(KEYS[key][1]+MAJ[i])%12]=1;
+ init();
+ for(s=5;s>=0;s--)for(f=lo;f<=hi;f++){n=(OPEN[s]+f)%12;if(!map[n])continue;
+  pluck(440*Math.pow(2,(MID[s]+f-69)/12),t);pulseAt(t,'#fb .dot[data-s="'+s+'"][data-f="'+f+'"]');t+=0.2;}}
+function drawFb(){
+ var sc=scaleOf(key),map={},i,s,f,n,x,y,out,ci=chordIdx(deg,sev),inC,w=720,fw=54,bw=boxWin();
+ for(i=0;i<7;i++)map[(KEYS[key][1]+MAJ[i])%12]=i;
+ out='<svg viewBox="0 0 '+w+' 200" width="100%" style="min-width:620px">';
+ out+='<rect x="40" y="14" width="'+(fw*12)+'" height="146" fill="#242832" stroke="#6b4a2b" stroke-width="2"/>';
+ for(f=0;f<=12;f++)out+='<line x1="'+(40+f*fw)+'" y1="14" x2="'+(40+f*fw)+'" y2="160" stroke="'+(f===0?'#ffe9cc':'#4a5263')+'" stroke-width="'+(f===0?5:2)+'"/>';
+ for(s=0;s<6;s++)out+='<line x1="40" y1="'+(30+s*24)+'" x2="'+(40+12*fw)+'" y2="'+(30+s*24)+'" stroke="#9aa3b5" stroke-width="'+(1+s*0.35)+'"/>';
+ var mk=[3,5,7,9,12];for(i=0;i<5;i++)out+='<text x="'+(40+(mk[i]-0.5)*fw)+'" y="180" fill="#9aa3b5" font-size="13" text-anchor="middle" font-family="Georgia">'+mk[i]+'</text>';
+ for(s=0;s<6;s++)for(f=0;f<=12;f++){n=(OPEN[s]+f)%12;if(map[n]===undefined||!inBox(f,bw))continue;
+  i=map[n];inC=ci.indexOf(i)>=0||ci.indexOf(i+7)>=0;x=f===0?22:40+(f-0.5)*fw;y=30+s*24;
+  out+='<g class="dot" data-n="'+n+'" data-s="'+s+'" data-f="'+f+'"><circle class="ring" cx="'+x+'" cy="'+y+'" r="'+(inC?11:8)+'" fill="none" stroke="#ffe9cc" stroke-width="2" opacity="0"/>';
+  out+='<circle cx="'+x+'" cy="'+y+'" r="'+(inC?11:8)+'" fill="'+(inC?'#f2a93b':'#181a20')+'" stroke="'+(i===0?'#ffe9cc':inC?'#f2a93b':'#4a5263')+'" stroke-width="'+(i===0?2.5:1.5)+'"/>';
+  out+='<text x="'+x+'" y="'+(y+4)+'" font-size="'+(inC?11:9)+'" text-anchor="middle" fill="'+(inC?'#111215':'#9aa3b5')+'" font-family="Georgia" font-weight="'+(inC?700:400)+'">'+sc[i]+'</text></g>';}
+ $('fb').innerHTML=out+'</svg>';}
+function render(){
+ var sc=scaleOf(key),i,h='',a,nm=[],j;
+ for(i=0;i<7;i++){a=chordIdx(i,sev);nm=[];for(j=0;j<a.length;j++)nm.push(sc[a[j]%7]);
+  h+='<button data-d="'+i+'" class="'+(i===deg?'on':'')+'"><b>'+(sev?ROM7[i]:ROM[i])+'</b>'+chordName(sc,i,sev)+'<i>'+nm.join(' ')+'</i></button>';}
+ $('deg').innerHTML=h;
+ $('info').innerHTML='Scale: '+sc.join(' ')+'. Selected: <b class="k">'+chordName(sc,deg,sev)+'</b> over the '+sc[deg]+' '+MODE[deg]+' mode ('+sc[deg]+' '+sc.slice(deg).concat(sc.slice(0,deg)).slice(1).join(' ')+').';
+ $('bx').textContent=box<0?'Box: All':'Box '+(box+1);$('info').innerHTML+=boxNote(sc);
+ drawFb();drawTv();}
+var MID=[64,59,55,50,45,40],SETS=[[0,1,2],[1,2,3],[2,3,4],[3,4,5]],IC=['#f2a93b','#6fb3ff','#5fd08a'],IN=['Root','1st inv','2nd inv'],RL=['R','3','5'],tsS=0,iv=0,vc=[];
+function voicings(){var ci=chordIdx(deg,false),p=[],k,st=SETS[tsS],o=[],a,b,c,n,f,mx,mn,r;
+ for(k=0;k<3;k++)p.push((KEYS[key][1]+MAJ[ci[k]%7])%12);
+ for(a=0;a<=14;a++)for(b=0;b<=14;b++)for(c=0;c<=14;c++){
+  f=[a,b,c];mx=Math.max(a,b,c);mn=Math.min(a,b,c);if(mx-mn>4)continue;
+  n=[(OPEN[st[0]]+a)%12,(OPEN[st[1]]+b)%12,(OPEN[st[2]]+c)%12];
+  r=[p.indexOf(n[0]),p.indexOf(n[1]),p.indexOf(n[2])];
+  if(r[0]<0||r[1]<0||r[2]<0||r[0]===r[1]||r[1]===r[2]||r[0]===r[2])continue;
+  o.push({f:f,r:r,inv:r[2],lo:mn});}
+ o.sort(function(x,y){return x.lo-y.lo;});return o;}
+function drawTv(){
+ var sc=scaleOf(key),st=SETS[tsS],all=voicings(),i,s,k,v,x,y,out,fw=48,h='',nm=[],ci=chordIdx(deg,false);
+ vc=[];for(i=0;i<all.length;i++)if(iv<0||all[i].inv===iv)vc.push(all[i]);
+ for(k=0;k<3;k++)nm.push(sc[ci[k]%7]);
+ $('tvt').innerHTML='<b class="k">'+chordName(sc,deg,false)+'</b> ('+nm.join(' ')+') on the '+['top','upper-middle','middle','bottom'][tsS]+' string set.';
+ out='<svg viewBox="0 0 740 200" width="100%" style="min-width:620px"><rect x="40" y="14" width="'+(fw*14)+'" height="146" fill="#242832" stroke="#6b4a2b" stroke-width="2"/>';
+ for(i=0;i<=14;i++)out+='<line x1="'+(40+i*fw)+'" y1="14" x2="'+(40+i*fw)+'" y2="160" stroke="'+(i===0?'#ffe9cc':'#4a5263')+'" stroke-width="'+(i===0?5:2)+'"/>';
+ for(s=0;s<6;s++)out+='<line x1="40" y1="'+(30+s*24)+'" x2="'+(40+14*fw)+'" y2="'+(30+s*24)+'" stroke="'+(st.indexOf(s)>=0?'#ffe9cc':'#4a5263')+'" stroke-width="'+(1+s*0.35)+'"/>';
+ var mk=[3,5,7,9,12];for(i=0;i<5;i++)out+='<text x="'+(40+(mk[i]-0.5)*fw)+'" y="180" fill="#9aa3b5" font-size="13" text-anchor="middle" font-family="Georgia">'+mk[i]+'</text>';
+ for(i=0;i<vc.length;i++){v=vc[i];for(k=0;k<3;k++){x=v.f[k]===0?22:40+(v.f[k]-0.5)*fw;y=30+st[k]*24;
+  out+='<g class="dot" data-s="'+st[k]+'" data-f="'+v.f[k]+'"><circle class="ring" cx="'+x+'" cy="'+y+'" r="10" fill="none" stroke="#ffe9cc" stroke-width="2" opacity="0"/><circle cx="'+x+'" cy="'+y+'" r="10" fill="'+IC[v.inv]+'" stroke="#111215" stroke-width="1.5"/><text x="'+x+'" y="'+(y+4)+'" font-size="11" font-weight="700" text-anchor="middle" fill="#111215" font-family="Georgia">'+RL[v.r[k]]+'</text></g>';}}
+ $('tf').innerHTML=out+'</svg>';
+ for(i=0;i<vc.length;i++)h+='<button data-v="'+i+'">'+IN[vc[i].inv]+': '+vc[i].f[2]+'-'+vc[i].f[1]+'-'+vc[i].f[0]+'</button>';
+ $('vl').innerHTML=h||'<span class="m">No voicing within a 4-fret span on this string set.</span>';}
+function playV(i){var v=vc[i],st=SETS[tsS],m,k;init();for(k=2;k>=0;k--){m=MID[st[k]]+v.f[k];pluck(440*Math.pow(2,(m-69)/12),(2-k)*0.05);pulseAt((2-k)*0.05,'#tf .dot[data-s="'+st[k]+'"][data-f="'+v.f[k]+'"]');}}
+function progText(i){var sc=scaleOf(key),a=PROGS[i][1],o=[],j;for(j=0;j<a.length;j++)o.push(chordName(sc,a[j],sev||i===4));return o.join('  \u2192  ');}
+function playProg(i){var a=PROGS[i][1],j;init();for(j=0;j<a.length;j++)playChord(a[j],j*1.2,sev||i===4);$('pn').textContent=PROGS[i][0]+' in '+KEYS[key][0]+': '+progText(i);}
+function newQ(){qk=Math.floor(Math.random()*12);qd=1+Math.floor(Math.random()*6);
+ $('q').innerHTML='In the key of <b class="k">'+KEYS[qk][0]+'</b>, what is the <b class="k">'+ROM[qd]+'</b> chord?';$('ans').textContent='';}
+(function(){var i,h='',b='';
+ for(i=0;i<12;i++)h+='<option value="'+i+'">'+KEYS[i][0]+' major</option>';$('key').innerHTML=h;
+ for(i=0;i<PROGS.length;i++)b+='<button data-p="'+i+'">'+PROGS[i][0]+'</button>';$('pg').innerHTML=b;
+ $('key').onchange=function(){key=parseInt(this.value,10);render();};
+ $('deg').onclick=function(e){var t=e.target;while(t&&t!==this&&!t.getAttribute('data-d'))t=t.parentNode;
+  if(t&&t.getAttribute&&t.getAttribute('data-d')!==null){deg=parseInt(t.getAttribute('data-d'),10);render();playChord(deg,0,sev);}};
+ $('sv').onclick=function(){sev=!sev;this.textContent=sev?'7ths':'Triads';render();};
+ $('ps').onclick=function(){if(box>=0){playBox();return;}var j;init();for(j=0;j<8;j++){pluck(hz(j),j*0.3);pulsePC(j,j*0.3);}};
+ $('pg').onclick=function(e){var p=e.target.getAttribute('data-p');if(p!==null)playProg(parseInt(p,10));};
+ $('bx').onclick=function(){box=box>=6?-1:box+1;render();};
+ $('qz').onclick=newQ;
+ $('rv').onclick=function(){var sc=scaleOf(qk);$('ans').textContent=chordName(sc,qd,false)+'  (scale: '+sc.join(' ')+')';};
+ var tb=document.querySelectorAll('.tabs button'),k;
+ for(k=0;k<tb.length;k++)tb[k].onclick=function(){var t=this.getAttribute('data-t'),x;
+  for(x=0;x<4;x++){tb[x].className=(x==t?'on':'');$('p'+x).className='pane pn'+(x==t?' on':'');}};
+ $('ss').onchange=function(){tsS=parseInt(this.value,10);drawTv();};
+ $('iv').onclick=function(e){var t=e.target.getAttribute('data-i'),b=this.querySelectorAll('button'),j;if(t===null)return;iv=parseInt(t,10);
+  for(j=0;j<b.length;j++)b[j].className=(b[j].getAttribute('data-i')===t?'on':'');drawTv();};
+ $('vl').onclick=function(e){var t=e.target.getAttribute('data-v');if(t!==null)playV(parseInt(t,10));};
+ newQ();render();})();
+</script></body></html>
